@@ -18,12 +18,12 @@ time = np.linspace(0, total_time, 2000)
 # Heart rate slowly increases due to fatigue
 fatigue_increase = 0.01 * time
 
-# Variability reduces over time (HRV decreases)
+# Variability reduces over time 
 hr_variation = 6 - 0.0015 * time
 
 # True heart rate signal
 true_heart_rate = 135 + fatigue_increase + hr_variation * np.sin(0.02 * time)
-# Random motion noise (gets worse with fatigue)
+# Random motion noise
 noise = np.random.normal(0, 5, len(time))
 
 # Sensor drift
@@ -96,10 +96,8 @@ print("Estimated Fatigue Onset (minutes):", round(fatigue_time, 2))
 
 from sklearn.linear_model import LinearRegression
 
-# Prepare time feature (reshape required)
 time_feature = time[:len(smoothed_hrv)].reshape(-1,1)
 
-# Target: smoothed HRV (continuous)
 target = smoothed_hrv
 
 model = LinearRegression()
